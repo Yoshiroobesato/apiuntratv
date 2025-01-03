@@ -2,7 +2,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = async (req, res) => {
-  const targetURL = "https://streamtp2.com/global1.php?stream=espn1"; // Reemplaza con la URL de tu página
+  const targetURL = "https://streamtp2.com/global1.php?stream=espn1"; // Reemplaza con la URL que deseas scrapear
 
   try {
     // Obtiene el contenido HTML de la página
@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     const $ = cheerio.load(html);
     const scriptContent = $("script").text();
 
-    // Extrae la variable playbackURL
+    // Extrae la variable playbackURL con una expresión regular
     const playbackURLMatch = scriptContent.match(/var playbackURL\s*=\s*"([^"]+)"/);
     if (playbackURLMatch) {
       const playbackURL = playbackURLMatch[1];
